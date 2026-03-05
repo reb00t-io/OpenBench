@@ -1,62 +1,44 @@
-# Bootstrap Template
+# OpenBench
 
-A template for bootstrapping new Python web apps. Copy all files into an empty repo and you're ready to go.
-
-## What's Included
-
-- **Flask + Uvicorn** web server (Python 3.13)
-- **Docker** build with docker-compose
-- **CI/CD** via GitHub Actions (build → e2e → deploy)
-- **Deploy script** that builds, uploads, and runs the container on a remote host via SSH
-- **E2e tests** that verify the running container
-- **VS Code** launch config
+LLM benchmark dashboard. Displays and compares scores for the latest models via an interactive bar chart.
 
 ## Quick Start
 
 ```bash
-# 1. Copy all files into your new repo
-
-# 2. Allow direnv to load the environment (creates venv, installs deps, sets PORT)
-direnv allow
-
-# 3. Run locally
+direnv allow      # create venv, install deps, set PORT
 python src/main.py
 # → http://localhost:$PORT
+```
 
-# 4. Or run with Docker
+Or with Docker:
+
+```bash
 ./scripts/build.sh
 docker compose up
 ```
 
-## Project Structure
+## Features
+
+- Model selector — toggle models on/off
+- Benchmark filter — limited to the common set for selected models
+- Grouped bar chart with per-benchmark averages
+- Data table with best scores highlighted
+
+## Structure
 
 ```
 src/
-  main.py              # Flask app entry point
-  templates/            # Jinja2 templates
-scripts/
-  venv.rc              # Create/activate venv and install deps
-  build.sh             # Docker build
-  deploy.sh            # Build, upload, and deploy to remote host
-  get_logs.sh          # Fetch container logs from remote
+  main.py               # Flask app + /api/benchmarks endpoint
+  data/benchmarks.json  # Static benchmark scores (source of truth)
+  templates/index.html  # Single-page dashboard (Chart.js)
 test/
-  e2e.sh               # End-to-end smoke test
-.github/workflows/
-  ci.yml               # CI pipeline: build → e2e → deploy
-.envrc                 # direnv: venv setup + PORT config
-Dockerfile
-docker-compose.yml
-pyproject.toml
-VERSION
+  test_benchmarks.py    # Schema, data, and API tests
+scripts/                # build, deploy, venv helpers
+.github/workflows/ci.yml
 ```
 
-## Customization
+## Adding a Model
 
-After copying, you'll want to:
-
-1. Rename the project in `pyproject.toml` and `VERSION`
-2. Update the Docker image name in `scripts/build.sh` and `scripts/deploy.sh`
-3. Set your remote host/port/user in `scripts/deploy.sh`
-4. Add your `DEPLOY_SSH_KEY` secret in GitHub repo settings
-5. Change `PORT` in `.envrc` if needed
-6. Replace `src/templates/hello.html` and the `/` route with your app
+1. Add an entry to `src/data/benchmarks.json` following the existing schema (`id`, `name`, `provider`, `url`, `color`, `benchmarks`).
+2. Use consistent benchmark key names for intersection logic to work.
+3. Run `pytest`.
