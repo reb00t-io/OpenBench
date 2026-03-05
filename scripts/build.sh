@@ -2,7 +2,8 @@
 set -euo pipefail
 
 PLATFORM="${1:-}"
-BUILD_ARGS=(--build-arg "DEPLOY_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" --build-arg "PORT=${PORT}" -t OpenBench)
+IMAGE_NAME="openbench"
+BUILD_ARGS=(--build-arg "DEPLOY_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" --build-arg "PORT=${PORT}" -t "$IMAGE_NAME")
 
 if [ -n "$PLATFORM" ]; then
   BUILD_ARGS+=(--platform "$PLATFORM")

@@ -1,6 +1,6 @@
 services:
-  OpenBench:
-    image: OpenBench
+  openbench:
+    image: openbench
     environment:
       - PORT=${PORT}
     ports:

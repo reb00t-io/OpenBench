@@ -4,7 +4,7 @@ set -euo pipefail
 REMOTE_HOST="test.k3rnel-pan1c.com"
 REMOTE_PORT=2223
 REMOTE_USER="marko"
-IMAGE_NAME="OpenBench"
+IMAGE_NAME="openbench"
 REMOTE="$REMOTE_USER@$REMOTE_HOST"
 SSH_OPTS=(-p "$REMOTE_PORT" -o ConnectTimeout=10 -o ServerAliveInterval=5 -o ServerAliveCountMax=3)
 

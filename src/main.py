@@ -1,23 +1,35 @@
+import json
 import os
 from pathlib import Path
 
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
 
 VERSION = Path("VERSION").read_text().strip()
 DEPLOY_DATE = os.environ.get("DEPLOY_DATE", "unknown")
 
+_DATA_PATH = Path(__file__).parent / "data" / "benchmarks.json"
+
+
+def load_benchmarks():
+    return json.loads(_DATA_PATH.read_text())
+
 
 @app.route("/")
-def hello():
-    return render_template("hello.html", version=VERSION, deploy_date=DEPLOY_DATE)
+def index():
+    return render_template("index.html", version=VERSION, deploy_date=DEPLOY_DATE)
+
+
+@app.route("/api/benchmarks")
+def benchmarks():
+    return jsonify(load_benchmarks())
 
 
 if __name__ == "__main__":
     import uvicorn
     from asgiref.wsgi import WsgiToAsgi
 
-    print(f"eat v{VERSION} (deployed {DEPLOY_DATE})", flush=True)
+    print(f"OpenBench v{VERSION} (deployed {DEPLOY_DATE})", flush=True)
     port = int(os.environ["PORT"])
     uvicorn.run(WsgiToAsgi(app), host="0.0.0.0", port=port, log_level="info", lifespan="off")

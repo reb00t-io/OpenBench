@@ -4,7 +4,7 @@ set -euo pipefail
 REMOTE_HOST="test.k3rnel-pan1c.com"
 REMOTE_PORT=2223
 REMOTE_USER="marko"
-IMAGE_NAME="OpenBench"
+IMAGE_NAME="openbench"
 REMOTE="$REMOTE_USER@$REMOTE_HOST"
 SSH_OPTS=(-p "$REMOTE_PORT" -o ConnectTimeout=10 -o ServerAliveInterval=5 -o ServerAliveCountMax=3)
 : "${PUBLIC_URL:?PUBLIC_URL must be set}"
@@ -69,7 +69,7 @@ if ! body=$(curl -sf --max-time 10 "$PUBLIC_URL"); then
   exit 1
 fi
 
-if ! echo "$body" | grep -q "hello"; then
+if ! echo "$body" | grep -q "OpenBench"; then
   echo "FAIL"
   echo "    $PUBLIC_URL does not contain 'hello'"
   echo "    $body"

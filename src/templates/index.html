@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenBench — LLM Benchmark Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #222535;
+      --border: #2e3149;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --accent: #6366f1;
+      --avg-color: #f59e0b;
+      --radius: 10px;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
+    header span.sub { color: var(--muted); font-size: 0.85rem; margin-left: auto; }
+
+    /* ── Layout ── */
+    .container { max-width: 1300px; margin: 0 auto; padding: 2rem; }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .control-group { display: flex; flex-direction: column; gap: 0.6rem; }
+    .control-group h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    label.pill {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    label.pill:hover { background: var(--surface2); }
+    label.pill input[type=checkbox] { display: none; }
+    label.pill.active {
+      border-color: var(--pill-color, var(--accent));
+      background: color-mix(in srgb, var(--pill-color, var(--accent)) 12%, var(--surface));
+    }
+    .pill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--pill-color, var(--accent));
+      flex-shrink: 0;
+    }
+
+    .bench-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    label.bench-pill {
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--muted);
+      transition: all 0.15s;
+      user-select: none;
+    }
+    label.bench-pill:hover { color: var(--text); border-color: #4a4f6a; }
+    label.bench-pill input[type=checkbox] { display: none; }
+    label.bench-pill.active {
+      color: var(--text);
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    }
+    label.bench-pill.unavailable {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .bench-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    button.link-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 0.78rem;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    /* ── Chart card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .chart-wrap { position: relative; height: 420px; }
+
+    /* ── Empty state ── */
+    .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Table ── */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    thead th {
+      text-align: left;
+      padding: 0.6rem 1rem;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    thead th.num { text-align: right; }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface2); }
+    td { padding: 0.55rem 1rem; text-align: left; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.best { color: #34d399; font-weight: 600; }
+    td.na { color: var(--muted); }
+    td.avg-cell { color: var(--avg-color); font-variant-numeric: tabular-nums; }
+    td.avg-cell.best { color: #34d399; }
+
+    /* model name pill in header */
+    .th-model {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.4rem;
+    }
+    .th-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OpenBench</h1>
+  <span class="sub">LLM Benchmark Dashboard · v{{ version }} · deployed {{ deploy_date }}</span>
+</header>
+
+<div class="container">
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="control-group">
+      <h2>Models</h2>
+      <div class="pills" id="model-pills"></div>
+      <div class="bench-actions">
+        <button class="link-btn" id="btn-models-all">Select all</button>
+        <button class="link-btn" id="btn-models-none">Deselect all</button>
+      </div>
+    </div>
+    <div class="control-group" style="flex:1; min-width: 300px;">
+      <h2>Benchmarks <span id="bench-count" style="font-weight:400; text-transform:none; letter-spacing:0;"></span></h2>
+      <div class="bench-pills" id="bench-pills"></div>
+      <div class="bench-actions">
+        <button class="link-btn" id="btn-all">Select all</button>
+        <button class="link-btn" id="btn-none">Deselect all</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="card">
+    <div class="card-title">Score Comparison</div>
+    <div class="chart-wrap">
+      <canvas id="chart"></canvas>
+      <div class="empty" id="empty-msg" style="display:none;">Select at least one model and one benchmark to display a chart.</div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card">
+    <div class="card-title">Data Table</div>
+    <div class="table-wrap">
+      <table id="data-table">
+        <thead id="table-head"></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(async () => {
+  // ── Load data ──────────────────────────────────────────────────
+  const resp = await fetch('/api/benchmarks');
+  const data = await resp.json();
+  const ALL_MODELS = data.models;
+
+  // ── State ──────────────────────────────────────────────────────
+  let selectedModels = new Set(ALL_MODELS.map(m => m.id));
+  let selectedBenches = new Set();
+  let allCommonBenches = [];
+
+  // ── Chart instance ─────────────────────────────────────────────
+  const ctx = document.getElementById('chart').getContext('2d');
+  let chart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: [], datasets: [] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 250 },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#8892a4',
+            font: { size: 12 },
+            boxWidth: 12,
+            padding: 16,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#1a1d27',
+          borderColor: '#2e3149',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#8892a4',
+          padding: 12,
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y !== null ? ctx.parsed.y.toFixed(1) : 'N/A'}`,
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#8892a4', font: { size: 11 }, maxRotation: 35, minRotation: 20 },
+          grid: { color: '#2e3149' },
+        },
+        y: {
+          min: 0,
+          max: 100,
+          ticks: { color: '#8892a4', font: { size: 11 } },
+          grid: { color: '#2e3149' },
+        }
+      }
+    }
+  });
+
+  // ── Compute common benchmarks for selected models ──────────────
+  function computeCommon() {
+    const active = ALL_MODELS.filter(m => selectedModels.has(m.id));
+    if (active.length === 0) return [];
+    const sets = active.map(m => new Set(Object.keys(m.benchmarks)));
+    const intersection = [...sets[0]].filter(b => sets.every(s => s.has(b)));
+    return intersection.sort();
+  }
+
+  // ── Compute average score for a benchmark ─────────────────────
+  function avg(bench) {
+    const active = ALL_MODELS.filter(m => selectedModels.has(m.id));
+    const vals = active.map(m => m.benchmarks[bench]).filter(v => v != null);
+    if (vals.length === 0) return null;
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
+  }
+
+  // ── Render model pills ─────────────────────────────────────────
+  const modelPillsEl = document.getElementById('model-pills');
+  ALL_MODELS.forEach(m => {
+    const lbl = document.createElement('label');
+    lbl.className = 'pill active';
+    lbl.style.setProperty('--pill-color', m.color);
+    lbl.innerHTML = `
+      <input type="checkbox" checked data-model="${m.id}" />
+      <span class="pill-dot"></span>
+      ${m.name}
+    `;
+    lbl.querySelector('input').addEventListener('change', e => {
+      if (e.target.checked) selectedModels.add(m.id);
+      else selectedModels.delete(m.id);
+      lbl.classList.toggle('active', e.target.checked);
+      refreshBenchPills();
+      render();
+    });
+    modelPillsEl.appendChild(lbl);
+  });
+
+  document.getElementById('btn-models-all').addEventListener('click', () => {
+    ALL_MODELS.forEach(m => selectedModels.add(m.id));
+    modelPillsEl.querySelectorAll('input[type=checkbox]').forEach(cb => {
+      cb.checked = true;
+      cb.closest('label').classList.add('active');
+    });
+    refreshBenchPills(); render();
+  });
+  document.getElementById('btn-models-none').addEventListener('click', () => {
+    selectedModels.clear();
+    modelPillsEl.querySelectorAll('input[type=checkbox]').forEach(cb => {
+      cb.checked = false;
+      cb.closest('label').classList.remove('active');
+    });
+    refreshBenchPills(); render();
+  });
+
+  // ── Render benchmark pills ────────────────────────────────────
+  const benchPillsEl = document.getElementById('bench-pills');
+  const benchCountEl = document.getElementById('bench-count');
+
+  function refreshBenchPills(defaultSelectAll = false) {
+    allCommonBenches = computeCommon();
+    // prune selected that are no longer common
+    for (const b of [...selectedBenches]) {
+      if (!allCommonBenches.includes(b)) selectedBenches.delete(b);
+    }
+    if (defaultSelectAll && selectedBenches.size === 0) {
+      allCommonBenches.forEach(b => selectedBenches.add(b));
+    }
+    benchPillsEl.innerHTML = '';
+    allCommonBenches.forEach(b => {
+      const lbl = document.createElement('label');
+      lbl.className = 'bench-pill' + (selectedBenches.has(b) ? ' active' : '');
+      lbl.innerHTML = `<input type="checkbox" ${selectedBenches.has(b) ? 'checked' : ''} />${b}`;
+      lbl.querySelector('input').addEventListener('change', e => {
+        if (e.target.checked) selectedBenches.add(b);
+        else selectedBenches.delete(b);
+        lbl.classList.toggle('active', e.target.checked);
+        updateBenchCount();
+        render();
+      });
+      benchPillsEl.appendChild(lbl);
+    });
+    updateBenchCount();
+  }
+
+  function updateBenchCount() {
+    benchCountEl.textContent = `(${selectedBenches.size} / ${allCommonBenches.length} common)`;
+  }
+
+  document.getElementById('btn-all').addEventListener('click', () => {
+    allCommonBenches.forEach(b => selectedBenches.add(b));
+    refreshBenchPills(); render();
+  });
+  document.getElementById('btn-none').addEventListener('click', () => {
+    selectedBenches.clear();
+    refreshBenchPills(); render();
+  });
+
+  // ── Render chart + table ──────────────────────────────────────
+  function render() {
+    const benches = allCommonBenches.filter(b => selectedBenches.has(b));
+    const activeModels = ALL_MODELS.filter(m => selectedModels.has(m.id));
+    const emptyMsg = document.getElementById('empty-msg');
+
+    if (benches.length === 0 || activeModels.length === 0) {
+      chart.data.labels = [];
+      chart.data.datasets = [];
+      chart.update();
+      emptyMsg.style.display = 'flex';
+      renderTable([], []);
+      return;
+    }
+    emptyMsg.style.display = 'none';
+
+    // Per-model average across selected benchmarks (appended as extra "benchmark")
+    function modelAvg(m) {
+      const vals = benches.map(b => m.benchmarks[b]).filter(v => v != null);
+      return vals.length ? vals.reduce((a, c) => a + c, 0) / vals.length : null;
+    }
+
+    // Sort models by descending average
+    activeModels.sort((a, b) => (modelAvg(b) ?? -Infinity) - (modelAvg(a) ?? -Infinity));
+
+    const labels = [...benches, 'Average'];
+    const datasets = activeModels.map(m => ({
+      label: m.name,
+      data: [...benches.map(b => m.benchmarks[b] ?? null), modelAvg(m)],
+      backgroundColor: m.color + 'cc',
+      borderColor: m.color,
+      borderWidth: 1.5,
+      borderRadius: 4,
+    }));
+
+    chart.data.labels = labels;
+    chart.data.datasets = datasets;
+    chart.update();
+
+    renderTable(benches, activeModels);
+  }
+
+  function renderTable(benches, activeModels) {
+    const thead = document.getElementById('table-head');
+    const tbody = document.getElementById('table-body');
+
+    if (benches.length === 0 || activeModels.length === 0) {
+      thead.innerHTML = '';
+      tbody.innerHTML = '<tr><td colspan="99" style="color:var(--muted);padding:1rem">No data to display.</td></tr>';
+      return;
+    }
+
+    // Header
+    const headerCols = activeModels.map(m =>
+      `<th class="num"><div class="th-model"><span class="th-dot" style="background:${m.color}"></span>${m.name}</div></th>`
+    ).join('');
+    thead.innerHTML = `<tr><th>Benchmark</th>${headerCols}</tr>`;
+
+    // Per-model averages across selected benches
+    function modelAvg(m) {
+      const vals = benches.map(b => m.benchmarks[b]).filter(v => v != null);
+      return vals.length ? vals.reduce((a, c) => a + c, 0) / vals.length : null;
+    }
+
+    // Body rows
+    const benchRows = benches.map(bench => {
+      const vals = activeModels.map(m => m.benchmarks[bench] ?? null);
+      const numVals = vals.filter(v => v != null);
+      const best = numVals.length ? Math.max(...numVals) : null;
+
+      const cells = vals.map(v => {
+        if (v == null) return `<td class="num na">—</td>`;
+        const isBest = v === best && numVals.length > 1;
+        return `<td class="num${isBest ? ' best' : ''}">${v.toFixed(1)}</td>`;
+      }).join('');
+
+      return `<tr><td>${bench}</td>${cells}</tr>`;
+    }).join('');
+
+    // Average row
+    const avgVals = activeModels.map(m => modelAvg(m));
+    const bestAvg = Math.max(...avgVals.filter(v => v != null));
+    const avgCells = avgVals.map(v => {
+      if (v == null) return `<td class="num na">—</td>`;
+      const isBest = v === bestAvg && avgVals.filter(v => v != null).length > 1;
+      return `<td class="num avg-cell${isBest ? ' best' : ''}">${v.toFixed(1)}</td>`;
+    }).join('');
+    const avgRow = `<tr style="border-top:2px solid var(--border);font-weight:600">
+      <td style="color:var(--avg-color)">Average</td>${avgCells}
+    </tr>`;
+
+    tbody.innerHTML = benchRows + avgRow;
+  }
+
+  // ── Init ──────────────────────────────────────────────────────
+  refreshBenchPills(true);
+  render();
+})();
+</script>
+</body>
+</html>
