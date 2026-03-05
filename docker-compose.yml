@@ -1,0 +1,7 @@
+services:
+  OpenBench:
+    image: OpenBench
+    environment:
+      - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}"
