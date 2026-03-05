@@ -37,7 +37,7 @@ class TestBenchmarkSchema:
         assert "models" in benchmark_data
         assert "benchmark_defs" in benchmark_data
         assert isinstance(benchmark_data["benchmark_defs"], list)
-        assert all("key" in d and "name" in d for d in benchmark_data["benchmark_defs"])
+        assert all(isinstance(s, str) for s in benchmark_data["benchmark_defs"])
 
     def test_models_is_list(self, benchmark_data):
         assert isinstance(benchmark_data["models"], list)

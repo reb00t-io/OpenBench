@@ -1,142 +1,37 @@
 [
-  {
-    "key": "MMLU-Pro",
-    "name": "MMLU-Pro"
-  },
-  {
-    "key": "GPQA-Diamond",
-    "name": "GPQA-Diamond"
-  },
-  {
-    "key": "HLE",
-    "name": "HLE"
-  },
-  {
-    "key": "AIME 2026",
-    "name": "AIME 2026"
-  },
-  {
-    "key": "HMMT Feb 2025",
-    "name": "HMMT Feb 2025"
-  },
-  {
-    "key": "HMMT Nov 2025",
-    "name": "HMMT Nov 2025"
-  },
-  {
-    "key": "IMOAnswerBench",
-    "name": "IMOAnswerBench"
-  },
-  {
-    "key": "LiveCodeBench v6",
-    "name": "LiveCodeBench v6"
-  },
-  {
-    "key": "SWE-bench Verified",
-    "name": "SWE-bench Verified"
-  },
-  {
-    "key": "SWE-bench Multilingual",
-    "name": "SWE-bench Multilingual"
-  },
-  {
-    "key": "BrowseComp",
-    "name": "BrowseComp"
-  },
-  {
-    "key": "LongBench v2",
-    "name": "LongBench v2"
-  },
-  {
-    "key": "WideSearch",
-    "name": "WideSearch"
-  },
-  {
-    "key": "Terminal Bench 2",
-    "name": "Terminal Bench 2"
-  },
-  {
-    "key": "IFEval",
-    "name": "IFEval"
-  },
-  {
-    "key": "TAU2-Bench",
-    "name": "TAU2-Bench"
-  },
-  {
-    "key": "MMMLU",
-    "name": "MMMLU"
-  },
-  {
-    "key": "MMMU-Pro",
-    "name": "MMMU-Pro"
-  },
-  {
-    "key": "MathVision",
-    "name": "MathVision"
-  },
-  {
-    "key": "MathVista",
-    "name": "MathVista"
-  },
-  {
-    "key": "OCRBench",
-    "name": "OCRBench"
-  },
-  {
-    "key": "VideoMME",
-    "name": "VideoMME"
-  },
-  {
-    "key": "CharXiv (RQ)",
-    "name": "CharXiv (RQ)"
-  },
-  {
-    "key": "VideoMMMU",
-    "name": "VideoMMMU"
-  },
-  {
-    "key": "MMVU",
-    "name": "MMVU"
-  },
-  {
-    "key": "LVBench",
-    "name": "LVBench"
-  },
-  {
-    "key": "HLE (w/ Tools)",
-    "name": "HLE (w/ Tools)"
-  },
-  {
-    "key": "AIME 2025",
-    "name": "AIME 2025"
-  },
-  {
-    "key": "BrowseComp (ctx)",
-    "name": "BrowseComp (ctx)"
-  },
-  {
-    "key": "BrowseComp-Zh",
-    "name": "BrowseComp-Zh"
-  },
-  {
-    "key": "CyberGym",
-    "name": "CyberGym"
-  },
-  {
-    "key": "MCP-Atlas",
-    "name": "MCP-Atlas"
-  },
-  {
-    "key": "Tool-Decathlon",
-    "name": "Tool-Decathlon"
-  },
-  {
-    "key": "ARC AGI 2",
-    "name": "ARC AGI 2"
-  },
-  {
-    "key": "OSWorld",
-    "name": "OSWorld"
-  }
+  "MMLU-Pro",
+  "GPQA-Diamond",
+  "HLE",
+  "HLE (w/ Tools)",
+  "ARC AGI 2",
+  "AIME 2025",
+  "AIME 2026",
+  "HMMT Feb 2025",
+  "HMMT Nov 2025",
+  "IMOAnswerBench",
+  "LiveCodeBench v6",
+  "SWE-bench Verified",
+  "SWE-bench Multilingual",
+  "OSWorld",
+  "BrowseComp",
+  "BrowseComp (ctx)",
+  "BrowseComp-Zh",
+  "LongBench v2",
+  "WideSearch",
+  "Terminal Bench 2",
+  "IFEval",
+  "TAU2-Bench",
+  "MCP-Atlas",
+  "Tool-Decathlon",
+  "CyberGym",
+  "MMMLU",
+  "MMMU-Pro",
+  "MathVision",
+  "MathVista",
+  "OCRBench",
+  "VideoMME",
+  "CharXiv (RQ)",
+  "VideoMMMU",
+  "MMVU",
+  "LVBench"
 ]

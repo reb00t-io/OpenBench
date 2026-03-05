@@ -253,9 +253,7 @@
   const resp = await fetch('/api/benchmarks');
   const data = await resp.json();
   const ALL_MODELS = data.models;
-  // Ordered list of keys; map key → display name
-  const ALL_BENCH_KEYS = data.benchmark_defs.map(d => d.key);
-  const BENCH_NAME = new Map(data.benchmark_defs.map(d => [d.key, d.name]));
+  const ALL_BENCH_KEYS = data.benchmark_defs;  // ordered list of benchmark names
 
   // ── State ──────────────────────────────────────────────────────
   let selectedModels = new Set(ALL_MODELS.map(m => m.id));
@@ -315,7 +313,7 @@
     const intersection = new Set([...sets[0]].filter(b => sets.every(s => s.has(b))));
     // Preserve order from benchmark_defs; unknown keys appended alphabetically at end
     const known = ALL_BENCH_KEYS.filter(k => intersection.has(k));
-    const unknown = [...intersection].filter(k => !BENCH_NAME.has(k)).sort();
+    const unknown = [...intersection].filter(k => !ALL_BENCH_KEYS.includes(k)).sort();
     return [...known, ...unknown];
   }
 
@@ -382,7 +380,7 @@
     allCommonBenches.forEach(b => {
       const lbl = document.createElement('label');
       lbl.className = 'bench-pill' + (selectedBenches.has(b) ? ' active' : '');
-      lbl.innerHTML = `<input type="checkbox" ${selectedBenches.has(b) ? 'checked' : ''} />${BENCH_NAME.get(b) ?? b}`;
+      lbl.innerHTML = `<input type="checkbox" ${selectedBenches.has(b) ? 'checked' : ''} />${b}`;
       lbl.querySelector('input').addEventListener('change', e => {
         if (e.target.checked) selectedBenches.add(b);
         else selectedBenches.delete(b);
@@ -433,7 +431,7 @@
     // Sort models by descending average
     activeModels.sort((a, b) => (modelAvg(b) ?? -Infinity) - (modelAvg(a) ?? -Infinity));
 
-    const labels = [...benches.map(b => BENCH_NAME.get(b) ?? b), 'Average'];
+    const labels = [...benches, 'Average'];
     const datasets = activeModels.map(m => ({
       label: m.name,
       data: [...benches.map(b => m.benchmarks[b] ?? null), modelAvg(m)],
@@ -484,7 +482,7 @@
         return `<td class="num${isBest ? ' best' : ''}">${v.toFixed(1)}</td>`;
       }).join('');
 
-      return `<tr><td>${BENCH_NAME.get(bench) ?? bench}</td>${cells}</tr>`;
+      return `<tr><td>${bench}</td>${cells}</tr>`;
     }).join('');
 
     // Average row
