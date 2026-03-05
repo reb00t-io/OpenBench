@@ -69,9 +69,9 @@ if ! body=$(curl -sf --max-time 10 "$PUBLIC_URL"); then
   exit 1
 fi
 
-if ! echo "$body" | grep -q "OpenBench"; then
+if ! echo "$body" | grep -q "LLM Benchmark Dashboard"; then
   echo "FAIL"
-  echo "    $PUBLIC_URL does not contain 'hello'"
+  echo "    $PUBLIC_URL does not contain 'LLM Benchmark Dashboard'"
   echo "    $body"
   exit 1
 fi

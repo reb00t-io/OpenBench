@@ -50,14 +50,18 @@ fi
 echo "checking response..."
 body=$(curl -sf http://localhost:"$PORT")
 
-if ! echo "$body" | grep -q "hello"; then
-  echo "FAIL: response does not contain 'hello'"
+if ! echo "$body" | grep -q "LLM Benchmark Dashboard"; then
+  echo "FAIL: response does not contain 'LLM Benchmark Dashboard'"
   echo "$body"
   exit 1
 fi
 
 echo "checking deploy date..."
-deploy_date=$(echo "$body" | sed -n 's/.*deployed \([^)]*\).*/\1/p')
+deploy_date=$(echo "$body" | grep -oE 'deployed [0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z' | head -n1 | sed 's/^deployed //')
+if [ -z "$deploy_date" ]; then
+  echo "FAIL: could not find ISO deploy date in response"
+  exit 1
+fi
 if deploy_ts=$(date -u -d "$deploy_date" +%s 2>/dev/null); then
   : # GNU date (Linux)
 elif deploy_ts=$(date -u -j -f "%Y-%m-%dT%H:%M:%SZ" "$deploy_date" +%s 2>/dev/null); then
