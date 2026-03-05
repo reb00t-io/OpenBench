@@ -1,0 +1,21 @@
+{
+  "id": "claude-opus-4-6",
+  "name": "Claude Opus 4.6",
+  "provider": "Anthropic",
+  "url": "https://www.anthropic.com/news/claude-opus-4-6",
+  "color": "#FB7185",
+  "benchmarks": {
+    "GPQA-Diamond": 91.3,
+    "HLE": 40.0,
+    "HLE (w/ Tools)": 53.0,
+    "ARC AGI 2": 68.8,
+    "SWE-bench Verified": 80.8,
+    "BrowseComp": 84.0,
+    "Terminal Bench 2": 65.4,
+    "TAU2-Bench": 95.6,
+    "OSWorld": 72.7,
+    "MCP-Atlas": 59.5,
+    "MMMLU": 91.1,
+    "MMMU-Pro": 73.9
+  }
+}

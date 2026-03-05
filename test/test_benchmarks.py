@@ -4,12 +4,15 @@ from pathlib import Path
 
 import pytest
 
-DATA_PATH = Path(__file__).parent.parent / "src" / "data" / "benchmarks.json"
+_DATA_DIR = Path(__file__).parent.parent / "src" / "data"
+BENCH_DEFS_PATH = _DATA_DIR / "benchmarks.json"
+MODELS_DIR = _DATA_DIR / "models"
 
 
 @pytest.fixture(scope="module")
 def benchmark_data():
-    return json.loads(DATA_PATH.read_text())
+    from src.main import load_benchmarks
+    return load_benchmarks()
 
 
 @pytest.fixture(scope="module")
@@ -25,11 +28,16 @@ def client():
 # ── Data schema tests ──────────────────────────────────────────────────────────
 
 class TestBenchmarkSchema:
-    def test_file_exists(self):
-        assert DATA_PATH.exists(), "benchmarks.json not found"
+    def test_files_exist(self):
+        assert BENCH_DEFS_PATH.exists(), "src/data/benchmarks.json not found"
+        assert MODELS_DIR.is_dir() and any(MODELS_DIR.glob("*.json")), \
+            "src/data/models/ has no JSON files"
 
-    def test_top_level_key(self, benchmark_data):
+    def test_top_level_keys(self, benchmark_data):
         assert "models" in benchmark_data
+        assert "benchmark_defs" in benchmark_data
+        assert isinstance(benchmark_data["benchmark_defs"], list)
+        assert all("key" in d and "name" in d for d in benchmark_data["benchmark_defs"])
 
     def test_models_is_list(self, benchmark_data):
         assert isinstance(benchmark_data["models"], list)

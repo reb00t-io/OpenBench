@@ -9,11 +9,16 @@ app = Flask(__name__)
 VERSION = Path("VERSION").read_text().strip()
 DEPLOY_DATE = os.environ.get("DEPLOY_DATE", "unknown")
 
-_DATA_PATH = Path(__file__).parent / "data" / "benchmarks.json"
+_DATA_DIR = Path(__file__).parent / "data"
 
 
 def load_benchmarks():
-    return json.loads(_DATA_PATH.read_text())
+    bench_defs = json.loads((_DATA_DIR / "benchmarks.json").read_text())
+    models = [
+        json.loads(p.read_text())
+        for p in sorted((_DATA_DIR / "models").glob("*.json"))
+    ]
+    return {"benchmark_defs": bench_defs, "models": models}
 
 
 @app.route("/")

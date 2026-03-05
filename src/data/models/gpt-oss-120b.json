@@ -1,0 +1,21 @@
+{
+  "id": "gpt-oss-120b",
+  "name": "GPT-OSS-120B",
+  "provider": "OpenAI",
+  "url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B-FP8",
+  "color": "#F97316",
+  "benchmarks": {
+    "MMLU-Pro": 80.8,
+    "GPQA-Diamond": 80.1,
+    "HMMT Feb 2025": 90.0,
+    "HMMT Nov 2025": 90.0,
+    "LiveCodeBench v6": 82.7,
+    "SWE-bench Verified": 62.0,
+    "BrowseComp": 41.1,
+    "LongBench v2": 48.2,
+    "WideSearch": 40.4,
+    "Terminal Bench 2": 18.7,
+    "IFEval": 88.9,
+    "MMMLU": 78.2
+  }
+}

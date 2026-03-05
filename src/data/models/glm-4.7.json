@@ -1,0 +1,25 @@
+{
+  "id": "glm-4.7",
+  "name": "GLM-4.7",
+  "provider": "ZAI",
+  "url": "https://huggingface.co/zai-org/GLM-5",
+  "color": "#2DD4BF",
+  "benchmarks": {
+    "GPQA-Diamond": 85.7,
+    "HLE": 24.8,
+    "AIME 2026": 92.9,
+    "HMMT Nov 2025": 93.5,
+    "IMOAnswerBench": 82.0,
+    "SWE-bench Verified": 73.8,
+    "SWE-bench Multilingual": 66.7,
+    "BrowseComp": 52.0,
+    "BrowseComp (ctx)": 67.5,
+    "BrowseComp-Zh": 66.6,
+    "Terminal Bench 2": 41.0,
+    "HLE (w/ Tools)": 42.8,
+    "CyberGym": 23.5,
+    "TAU2-Bench": 87.4,
+    "MCP-Atlas": 52.0,
+    "Tool-Decathlon": 23.8
+  }
+}

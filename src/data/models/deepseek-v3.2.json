@@ -1,0 +1,25 @@
+{
+  "id": "deepseek-v3.2",
+  "name": "DeepSeek-V3.2",
+  "provider": "DeepSeek",
+  "url": "https://huggingface.co/zai-org/GLM-5",
+  "color": "#FBBF24",
+  "benchmarks": {
+    "GPQA-Diamond": 82.4,
+    "HLE": 25.1,
+    "AIME 2026": 92.7,
+    "HMMT Nov 2025": 90.2,
+    "IMOAnswerBench": 78.3,
+    "SWE-bench Verified": 73.1,
+    "SWE-bench Multilingual": 70.2,
+    "BrowseComp": 51.4,
+    "BrowseComp (ctx)": 67.6,
+    "BrowseComp-Zh": 65.0,
+    "Terminal Bench 2": 39.3,
+    "HLE (w/ Tools)": 40.8,
+    "CyberGym": 17.3,
+    "TAU2-Bench": 85.3,
+    "MCP-Atlas": 62.2,
+    "Tool-Decathlon": 35.2
+  }
+}

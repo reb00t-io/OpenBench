@@ -1,0 +1,26 @@
+{
+  "id": "qwen3-max-thinking",
+  "name": "Qwen3-Max-Thinking",
+  "provider": "Qwen",
+  "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+  "color": "#84CC16",
+  "benchmarks": {
+    "MMLU-Pro": 85.7,
+    "GPQA-Diamond": 87.4,
+    "HLE": 30.2,
+    "AIME 2026": 93.3,
+    "HMMT Feb 2025": 98.0,
+    "HMMT Nov 2025": 94.7,
+    "IMOAnswerBench": 83.9,
+    "LiveCodeBench v6": 85.9,
+    "SWE-bench Verified": 75.3,
+    "SWE-bench Multilingual": 66.7,
+    "BrowseComp": 53.9,
+    "LongBench v2": 60.6,
+    "WideSearch": 57.9,
+    "Terminal Bench 2": 22.5,
+    "IFEval": 93.4,
+    "TAU2-Bench": 84.6,
+    "MMMLU": 84.4
+  }
+}
