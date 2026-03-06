@@ -2,6 +2,7 @@
   "id": "glm-5",
   "name": "GLM-5",
   "provider": "ZAI",
+  "release_date": "2026-02-12",
   "urls": [
     "https://huggingface.co/zai-org/GLM-5"
   ],

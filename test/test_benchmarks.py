@@ -46,10 +46,21 @@ class TestBenchmarkSchema:
         assert len(benchmark_data["models"]) >= 1
 
     def test_required_model_fields(self, benchmark_data):
-        required = {"id", "name", "provider", "urls", "color", "benchmarks"}
+        required = {"id", "name", "provider", "release_date", "urls", "color", "benchmarks"}
         for model in benchmark_data["models"]:
             missing = required - model.keys()
             assert not missing, f"{model.get('id')} missing fields: {missing}"
+
+    def test_release_dates_use_iso_format(self, benchmark_data):
+        import re
+        iso_date_re = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+        for model in benchmark_data["models"]:
+            assert isinstance(model["release_date"], str), (
+                f"{model['id']} release_date must be a string"
+            )
+            assert iso_date_re.match(model["release_date"]), (
+                f"{model['id']} has invalid release_date: {model['release_date']}"
+            )
 
     def test_urls_are_non_empty_string_lists(self, benchmark_data):
         for model in benchmark_data["models"]:

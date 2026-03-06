@@ -2,6 +2,7 @@
   "id": "gpt5.2",
   "name": "GPT-5.2",
   "provider": "OpenAI",
+  "release_date": "2025-12-11",
   "urls": [
     "https://huggingface.co/Qwen/Qwen3.5-397B-A17B"
   ],

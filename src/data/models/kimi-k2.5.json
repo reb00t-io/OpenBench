@@ -2,6 +2,7 @@
   "id": "kimi-k2.5",
   "name": "Kimi-K2.5",
   "provider": "Moonshot AI",
+  "release_date": "2026-01-27",
   "urls": [
     "https://huggingface.co/moonshotai/Kimi-K2.5"
   ],

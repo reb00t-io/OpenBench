@@ -40,7 +40,7 @@ scripts/                # build, deploy, venv helpers
 
 ## Adding a Model
 
-1. Add a JSON file under `src/data/models/` following the existing schema (`id`, `name`, `provider`, `urls`, `color`, `benchmarks`).
+1. Add a JSON file under `src/data/models/` following the existing schema (`id`, `name`, `provider`, `release_date`, `urls`, `color`, `benchmarks`).
 2. Use consistent benchmark key names for intersection logic to work.
 3. Add any brand-new benchmark names to `src/data/benchmarks.json` so they appear in the desired order.
 3. Run `pytest`.

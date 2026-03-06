@@ -2,6 +2,7 @@
   "id": "qwen3-max-thinking",
   "name": "Qwen3-Max-Thinking",
   "provider": "Qwen",
+  "release_date": "2026-01-25",
   "urls": [
     "https://huggingface.co/Qwen/Qwen3.5-397B-A17B"
   ],

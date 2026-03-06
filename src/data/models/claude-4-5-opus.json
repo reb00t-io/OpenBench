@@ -2,6 +2,7 @@
   "id": "claude-4-5-opus",
   "name": "Claude 4.5 Opus",
   "provider": "Anthropic",
+  "release_date": "2025-11-24",
   "urls": [
     "https://www.anthropic.com/claude/opus",
     "https://www.swebench.com/verified.html"
