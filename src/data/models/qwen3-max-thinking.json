@@ -2,7 +2,9 @@
   "id": "qwen3-max-thinking",
   "name": "Qwen3-Max-Thinking",
   "provider": "Qwen",
-  "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+  "urls": [
+    "https://huggingface.co/Qwen/Qwen3.5-397B-A17B"
+  ],
   "color": "#84CC16",
   "benchmarks": {
     "MMLU-Pro": 85.7,

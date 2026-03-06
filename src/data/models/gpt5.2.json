@@ -2,7 +2,9 @@
   "id": "gpt5.2",
   "name": "GPT-5.2",
   "provider": "OpenAI",
-  "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+  "urls": [
+    "https://huggingface.co/Qwen/Qwen3.5-397B-A17B"
+  ],
   "color": "#EF4444",
   "benchmarks": {
     "MMLU-Pro": 87.4,

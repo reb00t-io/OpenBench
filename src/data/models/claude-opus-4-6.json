@@ -2,7 +2,9 @@
   "id": "claude-opus-4-6",
   "name": "Claude Opus 4.6",
   "provider": "Anthropic",
-  "url": "https://www.anthropic.com/news/claude-opus-4-6",
+  "urls": [
+    "https://www.anthropic.com/news/claude-opus-4-6"
+  ],
   "color": "#FB7185",
   "benchmarks": {
     "GPQA-Diamond": 91.3,

@@ -1,0 +1,25 @@
+{
+  "id": "gemini-3.1-pro",
+  "name": "Gemini 3.1 Pro",
+  "provider": "Google",
+  "urls": [
+    "https://deepmind.google/models/gemini/",
+    "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+    "https://deepmind.google/models/evals-methodology/gemini-3-1-pro"
+  ],
+  "color": "#0891B2",
+  "benchmarks": {
+    "GPQA-Diamond": 94.3,
+    "HLE": 44.4,
+    "HLE (w/ Tools)": 51.4,
+    "ARC AGI 2": 77.1,
+    "SWE-Bench Pro (Public)": 54.2,
+    "SWE-bench Verified": 80.6,
+    "BrowseComp": 85.9,
+    "Terminal Bench 2": 68.5,
+    "MCP-Atlas": 69.2,
+    "Tau2-bench Telecom": 99.3,
+    "MMMLU": 92.6,
+    "MMMU-Pro": 80.5
+  }
+}

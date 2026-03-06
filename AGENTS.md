@@ -10,7 +10,6 @@
 ## 2. Executable Commands (Ground Truth)
 All commands listed here must work.
 
-- **Install / setup:** `direnv allow` (creates a virtualenv, installs dev dependencies)
 - **Run dev server:** `python src/main.py` (or `uvicorn src.main:app --port $PORT`)
 - **Docker build:** `./scripts/build.sh [linux/amd64]`
 - **Run e2e tests:** `./test/e2e.sh`
@@ -28,6 +27,8 @@ All commands listed here must work.
 - `.github/workflows/ci.yml` — CI pipeline
 - `Dockerfile`, `docker-compose.yml` — container configuration
 - `pyproject.toml` — package metadata and dependencies
+
+- for new benchmarks, make sure to reuse the keys defined in src/data/benchmarks.json
 
 **Entry points:**
 - Backend: `src/main.py`

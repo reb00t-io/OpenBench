@@ -2,7 +2,10 @@
   "id": "claude-4-5-opus",
   "name": "Claude 4.5 Opus",
   "provider": "Anthropic",
-  "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+  "urls": [
+    "https://www.anthropic.com/claude/opus",
+    "https://www.swebench.com/verified.html"
+  ],
   "color": "#EC4899",
   "benchmarks": {
     "MMLU-Pro": 89.5,

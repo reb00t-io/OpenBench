@@ -2,7 +2,9 @@
   "id": "glm-5",
   "name": "GLM-5",
   "provider": "ZAI",
-  "url": "https://huggingface.co/zai-org/GLM-5",
+  "urls": [
+    "https://huggingface.co/zai-org/GLM-5"
+  ],
   "color": "#10B981",
   "benchmarks": {
     "GPQA-Diamond": 86.0,

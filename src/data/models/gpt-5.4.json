@@ -1,0 +1,26 @@
+{
+  "id": "gpt-5.4",
+  "name": "GPT-5.4",
+  "provider": "OpenAI",
+  "urls": [
+    "https://openai.com/index/introducing-gpt-5-4/",
+    "https://developers.openai.com/api/docs/models/gpt-5.4",
+    "https://www.swebench.com/verified.html"
+  ],
+  "color": "#B91C1C",
+  "benchmarks": {
+    "GPQA-Diamond": 92.8,
+    "GDPval": 83.0,
+    "HLE": 39.8,
+    "HLE (w/ Tools)": 52.1,
+    "ARC AGI 2": 73.3,
+    "SWE-Bench Pro (Public)": 57.7,
+    "OSWorld": 75.0,
+    "BrowseComp": 82.7,
+    "Terminal Bench 2": 75.1,
+    "MCP-Atlas": 67.2,
+    "Toolathlon": 54.6,
+    "Tau2-bench Telecom": 98.9,
+    "MMMU-Pro": 81.2
+  }
+}

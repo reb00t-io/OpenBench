@@ -2,7 +2,9 @@
   "id": "gemini-3-pro",
   "name": "Gemini-3 Pro",
   "provider": "Google",
-  "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+  "urls": [
+    "https://huggingface.co/Qwen/Qwen3.5-397B-A17B"
+  ],
   "color": "#06B6D4",
   "benchmarks": {
     "MMLU-Pro": 89.8,

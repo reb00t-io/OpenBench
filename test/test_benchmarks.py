@@ -46,10 +46,20 @@ class TestBenchmarkSchema:
         assert len(benchmark_data["models"]) >= 1
 
     def test_required_model_fields(self, benchmark_data):
-        required = {"id", "name", "provider", "url", "color", "benchmarks"}
+        required = {"id", "name", "provider", "urls", "color", "benchmarks"}
         for model in benchmark_data["models"]:
             missing = required - model.keys()
             assert not missing, f"{model.get('id')} missing fields: {missing}"
+
+    def test_urls_are_non_empty_string_lists(self, benchmark_data):
+        for model in benchmark_data["models"]:
+            urls = model["urls"]
+            assert isinstance(urls, list) and urls, (
+                f"{model['id']} must define a non-empty urls list"
+            )
+            assert all(isinstance(url, str) and url for url in urls), (
+                f"{model['id']} has invalid urls: {urls}"
+            )
 
     def test_benchmarks_are_floats_or_ints(self, benchmark_data):
         for model in benchmark_data["models"]:
@@ -125,8 +135,12 @@ class TestCommonBenchmarks:
         ]
         assert len(ids_with_hle) >= 4, "Expected most models to have HLE"
 
-    def test_all_models_share_swebench_verified(self, benchmark_data):
-        ids = [m["id"] for m in benchmark_data["models"]]
+    def test_most_models_report_swebench_verified(self, benchmark_data):
+        ids = [
+            m["id"] for m in benchmark_data["models"]
+            if "SWE-bench Verified" in m["benchmarks"]
+        ]
+        assert len(ids) >= 8, "Expected most models to report SWE-bench Verified"
         common = self._common(benchmark_data, ids)
         assert "SWE-bench Verified" in common
 

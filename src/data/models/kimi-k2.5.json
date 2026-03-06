@@ -2,7 +2,9 @@
   "id": "kimi-k2.5",
   "name": "Kimi-K2.5",
   "provider": "Moonshot AI",
-  "url": "https://huggingface.co/moonshotai/Kimi-K2.5",
+  "urls": [
+    "https://huggingface.co/moonshotai/Kimi-K2.5"
+  ],
   "color": "#0EA5E9",
   "benchmarks": {
     "MMLU-Pro": 87.1,

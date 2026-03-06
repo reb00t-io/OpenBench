@@ -2,7 +2,9 @@
   "id": "deepseek-v3.2",
   "name": "DeepSeek-V3.2",
   "provider": "DeepSeek",
-  "url": "https://huggingface.co/zai-org/GLM-5",
+  "urls": [
+    "https://huggingface.co/zai-org/GLM-5"
+  ],
   "color": "#FBBF24",
   "benchmarks": {
     "GPQA-Diamond": 82.4,
