@@ -1,0 +1,11 @@
+{
+  "id": "gpt-4.5",
+  "name": "GPT-4.5",
+  "provider": "OpenAI",
+  "release_date": "2025-02-27",
+  "color": "#FCD34D",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/index/introducing-gpt-4-5"
+  ]
+}

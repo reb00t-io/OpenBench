@@ -1,0 +1,11 @@
+{
+  "id": "gpt-4",
+  "name": "GPT-4",
+  "provider": "OpenAI",
+  "release_date": "2023-03-14",
+  "color": "#3B82F6",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/research/gpt-4"
+  ]
+}

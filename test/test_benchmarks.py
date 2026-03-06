@@ -134,8 +134,8 @@ class TestCommonBenchmarks:
             result = result & s
         return result
 
-    def test_all_models_share_gpqa(self, benchmark_data):
-        ids = [m["id"] for m in benchmark_data["models"]]
+    def test_scored_models_share_gpqa(self, benchmark_data):
+        ids = [m["id"] for m in benchmark_data["models"] if m["benchmarks"]]
         common = self._common(benchmark_data, ids)
         assert "GPQA-Diamond" in common
 

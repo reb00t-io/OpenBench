@@ -1,0 +1,11 @@
+{
+  "id": "gpt-3",
+  "name": "GPT-3",
+  "provider": "OpenAI",
+  "release_date": "2020-05-28",
+  "color": "#6B7280",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/blog/openai-api"
+  ]
+}

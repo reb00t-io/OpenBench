@@ -1,0 +1,11 @@
+{
+  "id": "gpt-4o",
+  "name": "GPT-4o",
+  "provider": "OpenAI",
+  "release_date": "2024-05-13",
+  "color": "#38BDF8",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/index/hello-gpt-4o"
+  ]
+}

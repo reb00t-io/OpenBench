@@ -279,7 +279,16 @@
   const ALL_BENCH_KEYS = data.benchmark_defs;  // ordered list of benchmark names
 
   // ── State ──────────────────────────────────────────────────────
-  let selectedModels = new Set(ALL_MODELS.map(m => m.id));
+  function latestPerProvider() {
+    const best = {};
+    for (const m of ALL_MODELS) {
+      if (!m.release_date) continue;
+      if (!best[m.provider] || m.release_date > best[m.provider].release_date)
+        best[m.provider] = m;
+    }
+    return new Set(Object.values(best).map(m => m.id));
+  }
+  let selectedModels = latestPerProvider();
   let selectedBenches = new Set();
   let allCommonBenches = [];
 
@@ -330,7 +339,8 @@
 
   // ── Compute common benchmarks for selected models ──────────────
   function computeCommon() {
-    const active = ALL_MODELS.filter(m => selectedModels.has(m.id));
+    // Exclude models with no benchmark data so they don't collapse the intersection
+    const active = ALL_MODELS.filter(m => selectedModels.has(m.id) && Object.keys(m.benchmarks).length > 0);
     if (active.length === 0) return [];
     const sets = active.map(m => new Set(Object.keys(m.benchmarks)));
     const intersection = new Set([...sets[0]].filter(b => sets.every(s => s.has(b))));
@@ -352,10 +362,11 @@
   const modelPillsEl = document.getElementById('model-pills');
   ALL_MODELS.forEach(m => {
     const lbl = document.createElement('label');
-    lbl.className = 'pill active';
+    const sel = selectedModels.has(m.id);
+    lbl.className = 'pill' + (sel ? ' active' : '');
     lbl.style.setProperty('--pill-color', m.color);
     lbl.innerHTML = `
-      <input type="checkbox" checked data-model="${m.id}" />
+      <input type="checkbox" ${sel ? 'checked' : ''} data-model="${m.id}" />
       <span class="pill-dot"></span>
       ${m.name}
     `;

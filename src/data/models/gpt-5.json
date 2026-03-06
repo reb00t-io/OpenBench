@@ -1,0 +1,11 @@
+{
+  "id": "gpt-5",
+  "name": "GPT-5",
+  "provider": "OpenAI",
+  "release_date": "2025-08-07",
+  "color": "#F43F5E",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/gpt-5"
+  ]
+}

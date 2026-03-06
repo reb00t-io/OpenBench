@@ -1,0 +1,11 @@
+{
+  "id": "gpt-4-turbo",
+  "name": "GPT-4 Turbo",
+  "provider": "OpenAI",
+  "release_date": "2023-11-06",
+  "color": "#60A5FA",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/blog/new-models-and-developer-products-announced-at-devday"
+  ]
+}

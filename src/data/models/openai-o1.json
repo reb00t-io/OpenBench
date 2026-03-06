@@ -1,0 +1,11 @@
+{
+  "id": "openai-o1",
+  "name": "OpenAI o1",
+  "provider": "OpenAI",
+  "release_date": "2024-09-12",
+  "color": "#A78BFA",
+  "benchmarks": {},
+  "urls": [
+    "https://openai.com/o1"
+  ]
+}
