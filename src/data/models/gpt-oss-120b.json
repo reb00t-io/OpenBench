@@ -3,22 +3,28 @@
   "name": "GPT-OSS-120B",
   "provider": "OpenAI",
   "release_date": "2025-08-05",
-  "urls": [
-    "https://huggingface.co/Qwen/Qwen3.5-35B-A3B-FP8"
-  ],
   "color": "#F97316",
   "benchmarks": {
-    "MMLU-Pro": 80.8,
+    "MMLU-Pro": 81.0,
     "GPQA-Diamond": 80.1,
+    "HLE": 14.9,
+    "HLE (w/ Tools)": 19.0,
+    "AIME 2025": 92.5,
     "HMMT Feb 2025": 90.0,
     "HMMT Nov 2025": 90.0,
     "LiveCodeBench v6": 82.7,
-    "SWE-bench Verified": 62.0,
-    "BrowseComp": 41.1,
+    "SWE-bench Verified": 41.9,
+    "SWE-bench Multilingual": 30.8,
+    "BrowseComp": 33.89,
     "LongBench v2": 48.2,
     "WideSearch": 40.4,
     "Terminal Bench 2": 18.7,
+    "TAU2-Bench": 61.0,
+    "Tau2-bench Telecom": 66.0,
     "IFEval": 88.9,
     "MMMLU": 78.2
-  }
+  },
+  "urls": [
+    "https://huggingface.co/Qwen/Qwen3.5-35B-A3B-FP8"
+  ]
 }

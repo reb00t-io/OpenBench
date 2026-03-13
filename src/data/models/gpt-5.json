@@ -4,7 +4,13 @@
   "provider": "OpenAI",
   "release_date": "2025-08-07",
   "color": "#F43F5E",
-  "benchmarks": {},
+  "benchmarks": {
+    "GPQA-Diamond": 88.4,
+    "AIME 2025": 94.6,
+    "SWE-bench Verified": 74.9,
+    "MMMU-Pro": 78.4,
+    "VideoMMMU": 84.6
+  },
   "urls": [
     "https://openai.com/gpt-5"
   ]

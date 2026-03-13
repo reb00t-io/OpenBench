@@ -4,7 +4,11 @@
   "provider": "OpenAI",
   "release_date": "2025-04-16",
   "color": "#FB923C",
-  "benchmarks": {},
+  "benchmarks": {
+    "GPQA-Diamond": 87.7,
+    "AIME 2025": 88.9,
+    "SWE-bench Verified": 71.7
+  },
   "urls": [
     "https://openai.com/o3"
   ]

@@ -1,0 +1,30 @@
+{
+  "id": "qwen3.5-122b",
+  "name": "Qwen3.5-122B-A10B",
+  "provider": "Qwen",
+  "release_date": "2026-02-01",
+  "color": "#C026D3",
+  "benchmarks": {
+    "MMLU-Pro": 86.7,
+    "GPQA-Diamond": 86.6,
+    "HLE": 25.3,
+    "HLE (w/ Tools)": 47.5,
+    "AIME 2025": 90.36,
+    "HMMT Feb 2025": 91.4,
+    "HMMT Nov 2025": 90.3,
+    "LiveCodeBench v6": 78.9,
+    "SWE-bench Verified": 72.0,
+    "BrowseComp": 63.8,
+    "BrowseComp-Zh": 69.9,
+    "LongBench v2": 60.2,
+    "Terminal Bench 2": 49.4,
+    "TAU2-Bench": 79.5,
+    "Tau2-bench Telecom": 95.0,
+    "IFEval": 93.4,
+    "MMMU-Pro": 76.9,
+    "MathVision": 86.2
+  },
+  "urls": [
+    "https://huggingface.co/Qwen/Qwen3.5-122B-A10B"
+  ]
+}

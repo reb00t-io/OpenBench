@@ -1,0 +1,25 @@
+{
+  "id": "nemotron-3-super-120b",
+  "name": "Nemotron-3 Super 120B",
+  "provider": "NVIDIA",
+  "release_date": "2026-03-11",
+  "color": "#76B900",
+  "benchmarks": {
+    "MMLU-Pro": 83.73,
+    "GPQA-Diamond": 79.23,
+    "HLE": 18.26,
+    "HLE (w/ Tools)": 22.82,
+    "AIME 2025": 90.21,
+    "HMMT Feb 2025": 93.67,
+    "LiveCodeBench v6": 78.69,
+    "SWE-bench Verified": 60.47,
+    "SWE-bench Multilingual": 45.78,
+    "Terminal Bench 2": 31.00,
+    "TAU2-Bench": 61.15,
+    "Tau2-bench Telecom": 64.36
+  },
+  "urls": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+    "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf"
+  ]
+}

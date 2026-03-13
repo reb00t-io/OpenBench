@@ -4,7 +4,11 @@
   "provider": "OpenAI",
   "release_date": "2025-02-27",
   "color": "#FCD34D",
-  "benchmarks": {},
+  "benchmarks": {
+    "GPQA-Diamond": 71.4,
+    "SWE-bench Verified": 38.0,
+    "MMMLU": 85.1
+  },
   "urls": [
     "https://openai.com/index/introducing-gpt-4-5"
   ]

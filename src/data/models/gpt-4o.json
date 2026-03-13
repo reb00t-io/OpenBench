@@ -4,7 +4,13 @@
   "provider": "OpenAI",
   "release_date": "2024-05-13",
   "color": "#38BDF8",
-  "benchmarks": {},
+  "benchmarks": {
+    "GPQA-Diamond": 53.6,
+    "SWE-bench Verified": 30.7,
+    "IFEval": 81.0,
+    "MMMLU": 81.5,
+    "VideoMME": 65.3
+  },
   "urls": [
     "https://openai.com/index/hello-gpt-4o"
   ]
