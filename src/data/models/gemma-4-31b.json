@@ -1,0 +1,22 @@
+{
+  "id": "gemma-4-31b",
+  "name": "Gemma-4 31B",
+  "provider": "Google",
+  "release_date": "2026-04-02",
+  "urls": [
+    "https://huggingface.co/google/gemma-4-31B-it"
+  ],
+  "color": "#34A853",
+  "benchmarks": {
+    "MMLU-Pro": 85.2,
+    "GPQA-Diamond": 84.3,
+    "HLE": 19.5,
+    "HLE (w/ Tools)": 26.5,
+    "AIME 2026": 89.2,
+    "LiveCodeBench v6": 80.0,
+    "TAU2-Bench": 76.9,
+    "MMMLU": 88.4,
+    "MMMU-Pro": 76.9,
+    "MathVision": 85.6
+  }
+}
