@@ -1,0 +1,24 @@
+{
+  "id": "claude-mythos-preview",
+  "name": "Claude Mythos Preview",
+  "provider": "Anthropic",
+  "release_date": "2026-04-07",
+  "urls": [
+    "https://red.anthropic.com/2026/mythos-preview/"
+  ],
+  "color": "#BE123C",
+  "benchmarks": {
+    "GPQA-Diamond": 94.6,
+    "HLE": 56.8,
+    "HLE (w/ Tools)": 64.7,
+    "SWE-bench Verified": 93.9,
+    "SWE-Bench Pro (Public)": 77.8,
+    "SWE-bench Multilingual": 87.3,
+    "Terminal Bench 2": 82.0,
+    "BrowseComp": 86.9,
+    "OSWorld": 79.6,
+    "CyberGym": 83.1,
+    "MMMLU": 92.7,
+    "CharXiv (RQ)": 86.1
+  }
+}

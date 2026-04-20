@@ -1,0 +1,26 @@
+{
+  "id": "glm-5.1",
+  "name": "GLM-5.1",
+  "provider": "ZAI",
+  "release_date": "2026-04-07",
+  "urls": [
+    "https://huggingface.co/zai-org/GLM-5.1",
+    "https://docs.z.ai/guides/llm/glm-5.1"
+  ],
+  "color": "#34D399",
+  "benchmarks": {
+    "GPQA-Diamond": 86.2,
+    "HLE": 31.0,
+    "HLE (w/ Tools)": 52.3,
+    "AIME 2026": 95.3,
+    "HMMT Nov 2025": 94.0,
+    "IMOAnswerBench": 83.8,
+    "SWE-Bench Pro (Public)": 58.4,
+    "Terminal Bench 2": 63.5,
+    "BrowseComp": 68.0,
+    "BrowseComp (ctx)": 79.3,
+    "CyberGym": 68.7,
+    "MCP-Atlas": 71.8,
+    "Tool-Decathlon": 40.7
+  }
+}

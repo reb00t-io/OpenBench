@@ -1,0 +1,20 @@
+{
+  "id": "claude-opus-4-7",
+  "name": "Claude Opus 4.7",
+  "provider": "Anthropic",
+  "release_date": "2026-04-16",
+  "urls": [
+    "https://www.anthropic.com/news/claude-opus-4-7"
+  ],
+  "color": "#F43F5E",
+  "benchmarks": {
+    "GPQA-Diamond": 94.2,
+    "SWE-bench Verified": 87.6,
+    "SWE-Bench Pro (Public)": 64.3,
+    "Terminal Bench 2": 69.4,
+    "BrowseComp": 79.3,
+    "OSWorld": 78.0,
+    "MMMLU": 91.5,
+    "CharXiv (RQ)": 82.1
+  }
+}
