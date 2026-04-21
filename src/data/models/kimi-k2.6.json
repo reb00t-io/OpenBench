@@ -1,0 +1,29 @@
+{
+  "id": "kimi-k2.6",
+  "name": "Kimi-K2.6",
+  "provider": "Moonshot AI",
+  "release_date": "2026-04-20",
+  "urls": [
+    "https://huggingface.co/moonshotai/Kimi-K2.6"
+  ],
+  "color": "#0284C7",
+  "benchmarks": {
+    "GPQA-Diamond": 90.5,
+    "HLE": 34.7,
+    "HLE (w/ Tools)": 54.0,
+    "AIME 2026": 96.4,
+    "IMOAnswerBench": 86.0,
+    "LiveCodeBench v6": 89.6,
+    "SWE-Bench Pro (Public)": 58.6,
+    "SWE-bench Verified": 80.2,
+    "SWE-bench Multilingual": 76.7,
+    "OSWorld": 73.1,
+    "BrowseComp": 83.2,
+    "WideSearch": 80.8,
+    "Terminal Bench 2": 66.7,
+    "Toolathlon": 50.0,
+    "MMMU-Pro": 79.4,
+    "MathVision": 87.4,
+    "CharXiv (RQ)": 80.4
+  }
+}
