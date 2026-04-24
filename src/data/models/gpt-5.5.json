@@ -1,0 +1,26 @@
+{
+  "id": "gpt-5.5",
+  "name": "GPT-5.5",
+  "provider": "OpenAI",
+  "release_date": "2026-04-23",
+  "urls": [
+    "https://openai.com/index/introducing-gpt-5-5/"
+  ],
+  "color": "#DC2626",
+  "benchmarks": {
+    "GPQA-Diamond": 93.6,
+    "GDPval": 84.9,
+    "HLE": 41.4,
+    "HLE (w/ Tools)": 52.2,
+    "ARC AGI 2": 85.0,
+    "SWE-Bench Pro (Public)": 58.6,
+    "OSWorld": 78.7,
+    "BrowseComp": 84.4,
+    "Terminal Bench 2": 82.7,
+    "CyberGym": 81.8,
+    "MCP-Atlas": 75.3,
+    "Toolathlon": 55.6,
+    "Tau2-bench Telecom": 98.0,
+    "MMMU-Pro": 81.2
+  }
+}

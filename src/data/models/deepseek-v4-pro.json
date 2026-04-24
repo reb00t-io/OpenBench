@@ -1,0 +1,25 @@
+{
+  "id": "deepseek-v4-pro",
+  "name": "DeepSeek-V4-Pro",
+  "provider": "DeepSeek",
+  "release_date": "2026-04-24",
+  "urls": [
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"
+  ],
+  "color": "#7C3AED",
+  "benchmarks": {
+    "MMLU-Pro": 87.5,
+    "GPQA-Diamond": 90.1,
+    "HLE": 37.7,
+    "HLE (w/ Tools)": 48.2,
+    "LiveCodeBench v6": 93.5,
+    "IMOAnswerBench": 89.8,
+    "SWE-Bench Pro (Public)": 55.4,
+    "SWE-bench Verified": 80.6,
+    "SWE-bench Multilingual": 76.2,
+    "Terminal Bench 2": 67.9,
+    "BrowseComp": 83.4,
+    "MCP-Atlas": 73.6,
+    "Toolathlon": 51.8
+  }
+}

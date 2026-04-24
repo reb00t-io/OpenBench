@@ -12,13 +12,20 @@
     "HLE": 40.0,
     "HLE (w/ Tools)": 53.0,
     "ARC AGI 2": 68.8,
+    "SWE-Bench Pro (Public)": 53.4,
     "SWE-bench Verified": 80.8,
-    "BrowseComp": 84.0,
+    "SWE-bench Multilingual": 77.8,
+    "LiveCodeBench v6": 88.8,
+    "BrowseComp": 83.7,
     "Terminal Bench 2": 65.4,
     "TAU2-Bench": 95.6,
     "OSWorld": 72.7,
     "MCP-Atlas": 59.5,
+    "Toolathlon": 47.2,
+    "AIME 2026": 96.7,
+    "IMOAnswerBench": 75.3,
     "MMMLU": 91.1,
-    "MMMU-Pro": 73.9
+    "MMMU-Pro": 73.9,
+    "CharXiv (RQ)": 69.1
   }
 }

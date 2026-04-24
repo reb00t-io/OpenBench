@@ -21,6 +21,9 @@
     "MCP-Atlas": 69.2,
     "Tau2-bench Telecom": 99.3,
     "MMMLU": 92.6,
-    "MMMU-Pro": 80.5
+    "MMMU-Pro": 80.5,
+    "LiveCodeBench v6": 91.7,
+    "AIME 2026": 98.3,
+    "Toolathlon": 48.8
   }
 }
