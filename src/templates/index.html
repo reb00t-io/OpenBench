@@ -288,8 +288,32 @@
     }
     return new Set(Object.values(best).map(m => m.id));
   }
-  let selectedModels = latestPerProvider();
-  let selectedBenches = new Set();
+
+  // ── URL state (shareable selection) ────────────────────────────
+  function readUrlState() {
+    const p = new URLSearchParams(window.location.search);
+    const s = {};
+    if (p.has('models'))  s.models  = new Set(p.get('models').split(',').filter(Boolean));
+    if (p.has('benches')) s.benches = new Set(p.get('benches').split(',').filter(Boolean));
+    if (p.has('scatter')) s.scatter = p.get('scatter');
+    return s;
+  }
+  function writeUrlState() {
+    const p = new URLSearchParams();
+    p.set('models',  [...selectedModels].join(','));
+    p.set('benches', [...selectedBenches].join(','));
+    if (scatterBenchSel.value) p.set('scatter', scatterBenchSel.value);
+    const qs = p.toString();
+    history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
+  }
+
+  const urlState = readUrlState();
+  const validModelIds = new Set(ALL_MODELS.map(m => m.id));
+  let selectedModels = urlState.models
+    ? new Set([...urlState.models].filter(id => validModelIds.has(id)))
+    : latestPerProvider();
+  let selectedBenches = urlState.benches ?? new Set();
+  const benchesFromUrl = urlState.benches !== undefined;
   let allCommonBenches = [];
 
   // ── Chart instance ─────────────────────────────────────────────
@@ -376,6 +400,7 @@
       lbl.classList.toggle('active', e.target.checked);
       refreshBenchPills();
       render();
+      writeUrlState();
     });
     modelPillsEl.appendChild(lbl);
   });
@@ -386,7 +411,7 @@
       cb.checked = true;
       cb.closest('label').classList.add('active');
     });
-    refreshBenchPills(); render();
+    refreshBenchPills(); render(); writeUrlState();
   });
   document.getElementById('btn-models-none').addEventListener('click', () => {
     selectedModels.clear();
@@ -394,7 +419,7 @@
       cb.checked = false;
       cb.closest('label').classList.remove('active');
     });
-    refreshBenchPills(); render();
+    refreshBenchPills(); render(); writeUrlState();
   });
 
   // ── Render benchmark pills ────────────────────────────────────
@@ -421,6 +446,7 @@
         lbl.classList.toggle('active', e.target.checked);
         updateBenchCount();
         render();
+        writeUrlState();
       });
       benchPillsEl.appendChild(lbl);
     });
@@ -433,11 +459,11 @@
 
   document.getElementById('btn-all').addEventListener('click', () => {
     allCommonBenches.forEach(b => selectedBenches.add(b));
-    refreshBenchPills(); render();
+    refreshBenchPills(); render(); writeUrlState();
   });
   document.getElementById('btn-none').addEventListener('click', () => {
     selectedBenches.clear();
-    refreshBenchPills(); render();
+    refreshBenchPills(); render(); writeUrlState();
   });
 
   // ── Render chart + table ──────────────────────────────────────
@@ -546,8 +572,11 @@
       scatterBenchSel.appendChild(opt);
     }
   });
-  // Default to GPQA-Diamond if present
-  if ([...scatterBenchSel.options].some(o => o.value === 'GPQA-Diamond')) {
+  // Apply URL scatter selection if valid, else default to GPQA-Diamond if present
+  const scatterOpts = [...scatterBenchSel.options].map(o => o.value);
+  if (urlState.scatter && scatterOpts.includes(urlState.scatter)) {
+    scatterBenchSel.value = urlState.scatter;
+  } else if (scatterOpts.includes('GPQA-Diamond')) {
     scatterBenchSel.value = 'GPQA-Diamond';
   }
 
@@ -646,12 +675,13 @@
     scatterChart.update();
   }
 
-  scatterBenchSel.addEventListener('change', renderScatter);
+  scatterBenchSel.addEventListener('change', () => { renderScatter(); writeUrlState(); });
 
   // ── Init ──────────────────────────────────────────────────────
-  refreshBenchPills(true);
+  refreshBenchPills(!benchesFromUrl);
   render();
   renderScatter();
+  writeUrlState();
 })();
 </script>
 </body>
